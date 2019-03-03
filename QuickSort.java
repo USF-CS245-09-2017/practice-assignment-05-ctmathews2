@@ -3,43 +3,42 @@
 public class QuickSort implements SortingAlgorithm{
 
 
-	public int partition(int arr[], int low, int high) 
+	public int partition(int a[], int start, int end) 
 	{ 
-		int pivot = arr[high]; 
-		int i = (low-1);
-		for (int j=low; j<high; j++) 
+		int pivot = a[end]; //Take last index as pivot. (Better pivot points can be chosen)
+		int i = start-1; //
+		for (int j = start; j < end; j++) //From start to end
 		{ 
-			if (arr[j] <= pivot) 
+			if (a[j] <= pivot) //If less than pivot point. Swap elements
 			{ 
 				i++; 
-				int temp = arr[i]; 
-				arr[i] = arr[j]; 
-				arr[j] = temp; 
+				int temp = a[i]; 
+				a[i] = a[j]; 
+				a[j] = temp; 
 			} 
 		} 
 
-		int temp = arr[i+1]; 
-		arr[i+1] = arr[high]; 
-		arr[high] = temp; 
+		int temp = a[i+1]; // Get new pivot
+		a[i+1] = a[end]; 
+		a[end] = temp; 
 
-		return i+1; 
+		return i + 1; 
 	} 
 
-	public void sort(int a[]){
+	public void sort(int a[]){ //Get length and call overloaded sort
 		int length = a.length;
 		sort(a,0,length-1);
 	}
 
 
-	public void sort(int arr[], int low, int high) 
+	public void sort(int a[], int start, int end) //overloaded sort method with requried parameters
 	{ 
-		if (low < high) 
+		if (start < end) 
 		{ 
+			int pi = partition(a, start, end); //Find partition index
 
-			int pi = partition(arr, low, high); 
-
-			sort(arr, low, pi-1); 
-			sort(arr, pi+1, high); 
+			sort(a, start, pi-1); //Sort both halves
+			sort(a, pi+1, end); 
 		} 
 	} 
 
